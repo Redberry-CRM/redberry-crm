@@ -35,6 +35,7 @@ const NotesPage = () => {
         },
         onSuccess: () => { queryClient.invalidateQueries('notes') }
     })
+    
     const handleChange = (event: any) => { setInput(event.target.value) }
 
     return (

@@ -11,7 +11,9 @@ import { useQuery } from "react-query";
 export default function Home() {
   const user = getFromStorage("user");
   const { data, isLoading, isFetching, error } = useQuery("contacts", () => getContactsByOwner(user.uid));
-  const notes = data?.map((contact: any) => { if (contact.status === "Awaiting Call") { return contact.name + ' - ' + contact.note } });
+  const notes = data ?
+    data?.map((contact: any) => { if (contact.status === "Awaiting Call") { return contact.name + ' - ' + contact.note } }) :
+    [];
 
   return (
     <div className="page-container2">
@@ -20,8 +22,7 @@ export default function Home() {
 
       <div className='row-between align-start'>
         <Graph01 data={data} />
-        <Recommendations notes={notes} />
-
+        {notes && <Recommendations notes={notes} />}
 
       </div>
     </div >
